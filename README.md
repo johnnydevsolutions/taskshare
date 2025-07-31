@@ -86,12 +86,19 @@ taskshare/
 ```bash
 # Execute tudo com um comando
 docker-compose up
+
+# ⚠️ IMPORTANTE: Na primeira execução, inicialize o banco de dados:
+docker-compose exec backend npm run db:migrate
+
+# 💡 OPCIONAL: Para IntelliSense no VS Code, instale dependências localmente:
+cd backend && npm install
 ```
 
 **Acessos:**
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:3001
 - **📋 Swagger API Documentation**: http://localhost:3001/api-docs
+- **🏥 Health Check**: http://localhost:3001/health
 
 > **🎯 Para Recrutadores**: Acesse a **documentação interativa Swagger** em http://localhost:3001/api-docs para testar todos os endpoints da API diretamente no navegador!
 
@@ -302,7 +309,48 @@ A aplicação inclui **documentação Swagger completa e interativa** onde você
 - Validação de formulários em tempo real
 - Tema consistente com paleta de cores personalizada
 
-## 📝 Licença
+## � Troubleshooting
+
+### Erro 500 ao registrar usuário
+Se você receber erro 500 ao tentar registrar um usuário, provavelmente o banco de dados não foi inicializado:
+
+```bash
+# Execute as migrações do banco
+docker-compose exec backend npm run db:migrate
+```
+
+### Containers não iniciam
+```bash
+# Pare todos os containers
+docker-compose down
+
+# Reconstrua as imagens
+docker-compose up --build
+```
+
+### Problemas de TypeScript no VS Code
+Para que o IntelliSense funcione corretamente no VS Code, você precisa instalar as dependências localmente (mesmo usando Docker):
+
+```bash
+cd backend
+npm install
+```
+
+**Por que isso é necessário?**
+- O Docker instala as dependências apenas dentro do container
+- O VS Code precisa das dependências locais para análise de código, autocomplete e detecção de erros
+- Isso não afeta o funcionamento da aplicação, apenas melhora a experiência de desenvolvimento
+
+### Erro de proxy no frontend (ECONNREFUSED)
+Se o frontend não conseguir se conectar ao backend:
+
+```bash
+# Reconstrua os containers
+docker-compose down
+docker-compose up --build
+```
+
+## �📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 

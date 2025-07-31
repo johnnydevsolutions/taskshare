@@ -1,14 +1,17 @@
 # Use Node.js 18 Alpine for smaller image size
 FROM node:18-alpine
 
+# Install required dependencies for Prisma and health checks
+RUN apk add --no-cache openssl libc6-compat curl
+
 # Set working directory
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies (including dev dependencies for development)
+RUN npm install
 
 # Copy source code
 COPY . .

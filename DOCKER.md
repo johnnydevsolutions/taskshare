@@ -16,6 +16,9 @@ cd taskshare
 
 # Execute tudo com um comando
 docker-compose up
+
+# ⚠️ IMPORTANTE: Na primeira execução, execute as migrações do banco:
+docker-compose exec backend npm run db:migrate
 ```
 
 ### Opção 2: Usando Scripts NPM
@@ -40,13 +43,28 @@ npm run docker:down
 npm run docker:clean
 ```
 
+## 🗄️ Configuração do Banco de Dados
+
+**⚠️ IMPORTANTE**: Na primeira execução, você deve inicializar o banco de dados:
+
+```bash
+# Após executar docker-compose up, em outro terminal:
+docker-compose exec backend npm run db:migrate
+```
+
+Este comando:
+- Cria as tabelas no banco de dados SQLite
+- Aplica todas as migrações do Prisma
+- Gera o cliente Prisma atualizado
+
 ## 🌐 Acessos
 
-Após executar `docker-compose up`:
+Após executar `docker-compose up` e configurar o banco:
 
 - **Frontend**: http://localhost:5173
 - **Backend API**: http://localhost:3001
 - **📋 Swagger API Docs**: http://localhost:3001/api-docs
+- **🏥 Health Check**: http://localhost:3001/health
 
 ## 📋 Comandos Úteis
 
