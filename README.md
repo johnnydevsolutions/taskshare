@@ -77,8 +77,30 @@ taskshare/
 
 ## 🚀 Como Executar
 
-### Pré-requisitos
-- Node.js 18+ 
+### Opção 1: Docker (Recomendado) 🐳
+
+**Pré-requisitos:**
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+```bash
+# Execute tudo com um comando
+docker-compose up
+```
+
+**Acessos:**
+- **Frontend**: http://localhost:5173
+- **Backend API**: http://localhost:3001
+- **📋 Swagger API Documentation**: http://localhost:3001/api-docs
+
+> **🎯 Para Recrutadores**: Acesse a **documentação interativa Swagger** em http://localhost:3001/api-docs para testar todos os endpoints da API diretamente no navegador!
+
+📖 **Documentação completa**: [DOCKER.md](./DOCKER.md)
+
+### Opção 2: Desenvolvimento Local
+
+**Pré-requisitos:**
+- Node.js 18+
 - npm ou yarn
 
 ### 1. Clone o repositório
@@ -214,6 +236,53 @@ npm run dev
 - ✅ **Comentários**: Sem limite de caracteres (dentro do razoável)
 - ✅ **Compartilhamento**: Apenas por email de usuários registrados
 - ✅ **Sessões**: Tokens JWT expiram em 7 dias
+
+## 📋 API Documentation (Swagger)
+
+### 🎯 Para Recrutadores - Teste a API Interativamente!
+
+A aplicação inclui **documentação Swagger completa e interativa** onde você pode:
+
+- **📖 Visualizar todos os endpoints** com descrições detalhadas
+- **🧪 Testar endpoints diretamente** no navegador
+- **📝 Ver exemplos de request/response** para cada operação
+- **🔐 Autenticar e testar fluxos completos** de usuário
+
+**Acesso:** http://localhost:3001/api-docs
+
+### Principais Endpoints Disponíveis:
+
+#### 🔐 Autenticação
+- `POST /api/auth/register` - Registrar novo usuário
+- `POST /api/auth/login` - Fazer login
+- `GET /api/auth/me` - Obter dados do usuário logado
+
+#### 📋 Listas de Tarefas
+- `GET /api/lists` - Listar todas as listas do usuário
+- `POST /api/lists` - Criar nova lista
+- `PUT /api/lists/:id` - Editar lista
+- `DELETE /api/lists/:id` - Excluir lista
+- `POST /api/lists/:id/share` - Compartilhar lista
+
+#### ✅ Tarefas
+- `GET /api/lists/:listId/tasks` - Listar tarefas de uma lista
+- `POST /api/lists/:listId/tasks` - Criar nova tarefa
+- `PUT /api/tasks/:id` - Editar tarefa
+- `PATCH /api/tasks/:id/toggle` - Marcar/desmarcar como concluída
+- `DELETE /api/tasks/:id` - Excluir tarefa
+
+#### 💬 Comentários
+- `GET /api/tasks/:taskId/comments` - Listar comentários de uma tarefa
+- `POST /api/tasks/:taskId/comments` - Adicionar comentário
+
+### Como Testar:
+
+1. **Execute a aplicação** (Docker ou local)
+2. **Acesse** http://localhost:3001/api-docs
+3. **Registre um usuário** via endpoint `/api/auth/register`
+4. **Faça login** e copie o token JWT
+5. **Clique em "Authorize"** no Swagger e cole o token
+6. **Teste todos os endpoints** diretamente na interface!
 
 ## 🔒 Segurança
 

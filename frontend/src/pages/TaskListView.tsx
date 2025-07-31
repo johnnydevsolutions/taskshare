@@ -372,11 +372,15 @@ const TaskListView: React.FC = () => {
 
                   <div className="flex-1 min-w-0">
                     {editingTaskId === task.id ? (
-                      <div className="flex items-center space-x-2">
+                      <div
+                        className="flex items-center space-x-2"
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <input
                           type="text"
                           value={editingTitle}
                           onChange={(e) => setEditingTitle(e.target.value)}
+                          onClick={(e) => e.stopPropagation()}
                           className="flex-1 px-2 py-1 border border-gray-300 rounded text-sm"
                           onKeyDown={(e) => e.key === 'Enter' && handleEditTask(task.id)}
                           autoFocus
