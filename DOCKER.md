@@ -19,6 +19,10 @@ docker-compose up
 
 # ⚠️ IMPORTANTE: Na primeira execução, execute as migrações do banco:
 docker-compose exec backend npm run db:migrate
+
+# 💡 OPCIONAL: Para IntelliSense no VS Code, instale dependências localmente:
+cd backend && npm install
+cd ../frontend && npm install
 ```
 
 ### Opção 2: Usando Scripts NPM

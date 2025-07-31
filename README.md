@@ -92,6 +92,7 @@ docker-compose exec backend npm run db:migrate
 
 # 💡 OPCIONAL: Para IntelliSense no VS Code, instale dependências localmente:
 cd backend && npm install
+cd ../frontend && npm install
 ```
 
 **Acessos:**
@@ -332,7 +333,12 @@ docker-compose up --build
 Para que o IntelliSense funcione corretamente no VS Code, você precisa instalar as dependências localmente (mesmo usando Docker):
 
 ```bash
+# Backend
 cd backend
+npm install
+
+# Frontend
+cd ../frontend
 npm install
 ```
 
@@ -340,6 +346,7 @@ npm install
 - O Docker instala as dependências apenas dentro do container
 - O VS Code precisa das dependências locais para análise de código, autocomplete e detecção de erros
 - Isso não afeta o funcionamento da aplicação, apenas melhora a experiência de desenvolvimento
+- Resolve erros como "Cannot find module 'vite'" ou "Cannot find module 'express'"
 
 ### Erro de proxy no frontend (ECONNREFUSED)
 Se o frontend não conseguir se conectar ao backend:
